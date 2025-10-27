@@ -57,8 +57,9 @@ public class InventoryController {
 	@PutMapping("")
 	public ResponseEntity<InventoryResponseEntity> updateInventoryStock(@RequestParam(required = true) int inTakeCount, 
 			@RequestParam(required = true) double price,
-			@RequestParam(required = true) String partId){
-		InventoryResponseEntity inventoryResponseEntity =  inventoryService.updateInventoryStock(inTakeCount,price,partId);
+			@RequestParam(required = true) String partId,
+			@RequestParam(required = true) String action){
+		InventoryResponseEntity inventoryResponseEntity =  inventoryService.updateInventoryStock(inTakeCount,price,partId,action);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(inventoryResponseEntity);
 	}
 }

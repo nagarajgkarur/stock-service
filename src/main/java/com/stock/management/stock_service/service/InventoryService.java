@@ -72,10 +72,14 @@ public class InventoryService {
 		return inventoryResponseEntity;
 	}
 
-	public InventoryResponseEntity updateInventoryStock(int inTakeCount, double price, String partId) {
+	public InventoryResponseEntity updateInventoryStock(int inTakeCount, double price, String partId,String action) {
 		Inventory  inventory = inventoryRepository.findByPartId(partId);
 		Integer availableCount = inventory.getAvailableCount();
-		availableCount = availableCount+inTakeCount;
+		if(action.equals("add")) {
+			availableCount = availableCount+inTakeCount;
+		}else {
+			availableCount = availableCount-inTakeCount;
+		}
 		inventory.setPrice(price);
 		inventory.setAvailableCount(availableCount);
 		inventory = inventoryRepository.save(inventory);
